@@ -15,7 +15,7 @@ Display device: physically displays the current visitor count or occupancy level
 
 <img width="1920" height="1080" alt="The Problem-2" src="https://github.com/user-attachments/assets/cac08fa6-ae7f-4d72-b9b4-80ebaf75efbf" />
 
-### Device ComponentsTable
+### Device Components Table
 
 | Device         | Component    | Part Number            | Function                  |
 | -------------- | ------------ | ---------------------- | ------------------------- |
