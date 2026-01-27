@@ -1,0 +1,8 @@
+"#","Reference","Qty","Value","Footprint","DNP"
+"1","Button1","1","~","",""
+"2","D1, D2, D3, D4","4","NeoPixel_THT","",""
+"3","J1","1","Battery","",""
+"4","M1","1","Stepper_Motor_bipolar","",""
+"5","U1","1","ESP32C3","113991054:MODULE_113991054",""
+"6","U2","1","ULN2003A","",""
+"7","U3","1","SSD1306","",""

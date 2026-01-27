@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="E">
+  <design>
+    <source>/Users/dyx/Documents/514/FinalProject/Museum/Museum.kicad_sch</source>
+    <date>2026-01-26T22:42:36-0800</date>
+    <tool>Eeschema 9.0.7</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title/>
+        <company/>
+        <rev/>
+        <date>2026-01-26</date>
+        <source>Museum.kicad_sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="Button1">
+      <value>~</value>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Device" part="Button" description=""/>
+      <property name="Sheetname" value="Root"/>
+      <property name="Sheetfile" value="Museum.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>ec779da3-0aae-441d-bed6-f2d8738f36f8</tstamps>
+    </comp>
+    <comp ref="D1">
+      <value>NeoPixel_THT</value>
+      <datasheet>https://www.adafruit.com/product/1938</datasheet>
+      <description>RGB LED with integrated controller, 5mm/8mm LED package</description>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet">https://www.adafruit.com/product/1938</field>
+        <field name="Description">RGB LED with integrated controller, 5mm/8mm LED package</field>
+      </fields>
+      <libsource lib="LED" part="NeoPixel_THT" description="RGB LED with integrated controller, 5mm/8mm LED package"/>
+      <property name="Sheetname" value="Root"/>
+      <property name="Sheetfile" value="Museum.kicad_sch"/>
+      <property name="ki_keywords" value="RGB LED NeoPixel addressable"/>
+      <property name="ki_fp_filters" value="LED*D5.0mm* LED*D8.0mm*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>baf15f79-4b0d-474b-a9a9-ad0282695eeb</tstamps>
+    </comp>
+    <comp ref="D2">
+      <value>NeoPixel_THT</value>
+      <datasheet>https://www.adafruit.com/product/1938</datasheet>
+      <description>RGB LED with integrated controller, 5mm/8mm LED package</description>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet">https://www.adafruit.com/product/1938</field>
+        <field name="Description">RGB LED with integrated controller, 5mm/8mm LED package</field>
+      </fields>
+      <libsource lib="LED" part="NeoPixel_THT" description="RGB LED with integrated controller, 5mm/8mm LED package"/>
+      <property name="Sheetname" value="Root"/>
+      <property name="Sheetfile" value="Museum.kicad_sch"/>
+      <property name="ki_keywords" value="RGB LED NeoPixel addressable"/>
+      <property name="ki_fp_filters" value="LED*D5.0mm* LED*D8.0mm*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>17c07ac0-52b5-4305-b434-88be88b8921f</tstamps>
+    </comp>
+    <comp ref="D3">
+      <value>NeoPixel_THT</value>
+      <datasheet>https://www.adafruit.com/product/1938</datasheet>
+      <description>RGB LED with integrated controller, 5mm/8mm LED package</description>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet">https://www.adafruit.com/product/1938</field>
+        <field name="Description">RGB LED with integrated controller, 5mm/8mm LED package</field>
+      </fields>
+      <libsource lib="LED" part="NeoPixel_THT" description="RGB LED with integrated controller, 5mm/8mm LED package"/>
+      <property name="Sheetname" value="Root"/>
+      <property name="Sheetfile" value="Museum.kicad_sch"/>
+      <property name="ki_keywords" value="RGB LED NeoPixel addressable"/>
+      <property name="ki_fp_filters" value="LED*D5.0mm* LED*D8.0mm*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>a6c70099-fb73-4314-bcd5-80eb21297328</tstamps>
+    </comp>
+    <comp ref="D4">
+      <value>NeoPixel_THT</value>
+      <datasheet>https://www.adafruit.com/product/1938</datasheet>
+      <description>RGB LED with integrated controller, 5mm/8mm LED package</description>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet">https://www.adafruit.com/product/1938</field>
+        <field name="Description">RGB LED with integrated controller, 5mm/8mm LED package</field>
+      </fields>
+      <libsource lib="LED" part="NeoPixel_THT" description="RGB LED with integrated controller, 5mm/8mm LED package"/>
+      <property name="Sheetname" value="Root"/>
+      <property name="Sheetfile" value="Museum.kicad_sch"/>
+      <property name="ki_keywords" value="RGB LED NeoPixel addressable"/>
+      <property name="ki_fp_filters" value="LED*D5.0mm* LED*D8.0mm*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>2abed0e2-1c7d-462d-893d-bc9f00ef91e8</tstamps>
+    </comp>
+    <comp ref="J1">
+      <value>Battery</value>
+      <datasheet>~</datasheet>
+      <description>Generic connector, single row, 01x02, script generated</description>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet">~</field>
+        <field name="Description">Generic connector, single row, 01x02, script generated</field>
+      </fields>
+      <libsource lib="Connector" part="Conn_01x02_Socket" description="Generic connector, single row, 01x02, script generated"/>
+      <property name="Sheetname" value="Root"/>
+      <property name="Sheetfile" value="Museum.kicad_sch"/>
+      <property name="ki_keywords" value="connector"/>
+      <property name="ki_fp_filters" value="Connector*:*_1x??_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>345043a1-b447-4e45-af51-fd1fbe3cc824</tstamps>
+    </comp>
+    <comp ref="M1">
+      <value>Stepper_Motor_bipolar</value>
+      <datasheet>http://www.infineon.com/dgdl/Application-Note-TLE8110EE_driving_UniPolarStepperMotor_V1.1.pdf?fileId=db3a30431be39b97011be5d0aa0a00b0</datasheet>
+      <description>4-wire bipolar stepper motor</description>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet">http://www.infineon.com/dgdl/Application-Note-TLE8110EE_driving_UniPolarStepperMotor_V1.1.pdf?fileId=db3a30431be39b97011be5d0aa0a00b0</field>
+        <field name="Description">4-wire bipolar stepper motor</field>
+      </fields>
+      <libsource lib="Motor" part="Stepper_Motor_bipolar" description="4-wire bipolar stepper motor"/>
+      <property name="Sheetname" value="Root"/>
+      <property name="Sheetfile" value="Museum.kicad_sch"/>
+      <property name="ki_keywords" value="bipolar stepper motor"/>
+      <property name="ki_fp_filters" value="PinHeader*P2.54mm*Vertical* TerminalBlock* Motor*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>5a1a6126-ac03-4a61-ba05-d4be0fb3cc65</tstamps>
+    </comp>
+    <comp ref="U1">
+      <value>ESP32C3</value>
+      <footprint>113991054:MODULE_113991054</footprint>
+      <fields>
+        <field name="PARTREV">23/05/2022</field>
+        <field name="MANUFACTURER">Seeed Technology</field>
+        <field name="SNAPEDA_PN">113991054</field>
+        <field name="MAXIMUM_PACKAGE_HEIGHT">N/A</field>
+        <field name="STANDARD">Manufacturer Recommendations</field>
+        <field name="Footprint">113991054:MODULE_113991054</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="ESP32" part="113991054" description=""/>
+      <property name="PARTREV" value="23/05/2022"/>
+      <property name="MANUFACTURER" value="Seeed Technology"/>
+      <property name="SNAPEDA_PN" value="113991054"/>
+      <property name="MAXIMUM_PACKAGE_HEIGHT" value="N/A"/>
+      <property name="STANDARD" value="Manufacturer Recommendations"/>
+      <property name="Sheetname" value="Root"/>
+      <property name="Sheetfile" value="Museum.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>f12209df-6cb7-40d2-b6b5-2caf73d1e007</tstamps>
+    </comp>
+    <comp ref="U2">
+      <value>ULN2003A</value>
+      <datasheet>http://www.ti.com/lit/ds/symlink/uln2003a.pdf</datasheet>
+      <description>High Voltage, High Current Darlington Transistor Arrays, SOIC16/SOIC16W/DIP16/TSSOP16</description>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet">http://www.ti.com/lit/ds/symlink/uln2003a.pdf</field>
+        <field name="Description">High Voltage, High Current Darlington Transistor Arrays, SOIC16/SOIC16W/DIP16/TSSOP16</field>
+      </fields>
+      <libsource lib="Transistor_Array" part="ULN2003A" description="High Voltage, High Current Darlington Transistor Arrays, SOIC16/SOIC16W/DIP16/TSSOP16"/>
+      <property name="Sheetname" value="Root"/>
+      <property name="Sheetfile" value="Museum.kicad_sch"/>
+      <property name="ki_keywords" value="darlington transistor array"/>
+      <property name="ki_fp_filters" value="DIP*W7.62mm* SOIC*3.9x9.9mm*P1.27mm* SSOP*4.4x5.2mm*P0.65mm* TSSOP*4.4x5mm*P0.65mm* SOIC*W*5.3x10.2mm*P1.27mm*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>04e960c5-de60-42d5-9634-341b34cda597</tstamps>
+    </comp>
+    <comp ref="U3">
+      <value>SSD1306</value>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Device" part="SDD1306" description=""/>
+      <property name="Sheetname" value="Root"/>
+      <property name="Sheetfile" value="Museum.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>de0d113c-8cee-4443-be82-17bd97741128</tstamps>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="Connector" part="Conn_01x02_Socket">
+      <description>Generic connector, single row, 01x02, script generated</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Connector*:*_1x??_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_01x02_Socket</field>
+        <field name="Footprint"/>
+        <field name="Datasheet">~</field>
+        <field name="Description">Generic connector, single row, 01x02, script generated</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="Button">
+      <fields>
+        <field name="Reference">Button</field>
+        <field name="Value"/>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="" name="S1" type="bidirectional"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="SDD1306">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value"/>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="SDA" type="bidirectional"/>
+        <pin num="2" name="SCL" type="bidirectional"/>
+        <pin num="3" name="GND" type="bidirectional"/>
+        <pin num="4" name="VCC" type="bidirectional"/>
+      </pins>
+    </libpart>
+    <libpart lib="ESP32" part="113991054">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">ESP32C3</field>
+        <field name="Footprint">113991054:MODULE_113991054</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+        <field name="PARTREV">23/05/2022</field>
+        <field name="MANUFACTURER">Seeed Technology</field>
+        <field name="SNAPEDA_PN">113991054</field>
+        <field name="MAXIMUM_PACKAGE_HEIGHT">N/A</field>
+        <field name="STANDARD">Manufacturer Recommendations</field>
+      </fields>
+      <pins>
+        <pin num="" name="+" type="bidirectional"/>
+        <pin num="1" name="D0" type="bidirectional"/>
+        <pin num="2" name="D1" type="bidirectional"/>
+        <pin num="3" name="D2" type="bidirectional"/>
+        <pin num="4" name="D3" type="bidirectional"/>
+        <pin num="5" name="D4" type="bidirectional"/>
+        <pin num="6" name="D5" type="bidirectional"/>
+        <pin num="7" name="TX_D6" type="bidirectional"/>
+        <pin num="8" name="RX_D7" type="bidirectional"/>
+        <pin num="9" name="D8" type="bidirectional"/>
+        <pin num="10" name="D9" type="bidirectional"/>
+        <pin num="11" name="D10" type="bidirectional"/>
+        <pin num="12" name="VCC_3V3" type="power_in"/>
+        <pin num="13" name="GND" type="power_in"/>
+        <pin num="14" name="VUSB" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="LED" part="NeoPixel_THT">
+      <description>RGB LED with integrated controller, 5mm/8mm LED package</description>
+      <docs>https://www.adafruit.com/product/1938</docs>
+      <footprints>
+        <fp>LED*D5.0mm*</fp>
+        <fp>LED*D8.0mm*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">NeoPixel_THT</field>
+        <field name="Footprint"/>
+        <field name="Datasheet">https://www.adafruit.com/product/1938</field>
+        <field name="Description">RGB LED with integrated controller, 5mm/8mm LED package</field>
+      </fields>
+      <pins>
+        <pin num="1" name="DOUT" type="output"/>
+        <pin num="2" name="GND" type="power_in"/>
+        <pin num="3" name="VDD" type="power_in"/>
+        <pin num="4" name="DIN" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="Motor" part="Stepper_Motor_bipolar">
+      <description>4-wire bipolar stepper motor</description>
+      <docs>http://www.infineon.com/dgdl/Application-Note-TLE8110EE_driving_UniPolarStepperMotor_V1.1.pdf?fileId=db3a30431be39b97011be5d0aa0a00b0</docs>
+      <footprints>
+        <fp>PinHeader*P2.54mm*Vertical*</fp>
+        <fp>TerminalBlock*</fp>
+        <fp>Motor*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">M</field>
+        <field name="Value">Stepper_Motor_bipolar</field>
+        <field name="Footprint"/>
+        <field name="Datasheet">http://www.infineon.com/dgdl/Application-Note-TLE8110EE_driving_UniPolarStepperMotor_V1.1.pdf?fileId=db3a30431be39b97011be5d0aa0a00b0</field>
+        <field name="Description">4-wire bipolar stepper motor</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="-" type="passive"/>
+        <pin num="3" name="" type="passive"/>
+        <pin num="4" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Transistor_Array" part="ULN2003A">
+      <description>High Voltage, High Current Darlington Transistor Arrays, SOIC16/SOIC16W/DIP16/TSSOP16</description>
+      <docs>http://www.ti.com/lit/ds/symlink/uln2003a.pdf</docs>
+      <footprints>
+        <fp>DIP*W7.62mm*</fp>
+        <fp>SOIC*3.9x9.9mm*P1.27mm*</fp>
+        <fp>SSOP*4.4x5.2mm*P0.65mm*</fp>
+        <fp>TSSOP*4.4x5mm*P0.65mm*</fp>
+        <fp>SOIC*W*5.3x10.2mm*P1.27mm*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">ULN2003A</field>
+        <field name="Footprint"/>
+        <field name="Datasheet">http://www.ti.com/lit/ds/symlink/uln2003a.pdf</field>
+        <field name="Description">High Voltage, High Current Darlington Transistor Arrays, SOIC16/SOIC16W/DIP16/TSSOP16</field>
+      </fields>
+      <pins>
+        <pin num="1" name="I1" type="input"/>
+        <pin num="2" name="I2" type="input"/>
+        <pin num="3" name="I3" type="input"/>
+        <pin num="4" name="I4" type="input"/>
+        <pin num="5" name="I5" type="input"/>
+        <pin num="6" name="I6" type="input"/>
+        <pin num="7" name="I7" type="input"/>
+        <pin num="8" name="GND" type="power_in"/>
+        <pin num="9" name="COM" type="passive"/>
+        <pin num="10" name="O7" type="open_collector"/>
+        <pin num="11" name="O6" type="open_collector"/>
+        <pin num="12" name="O5" type="open_collector"/>
+        <pin num="13" name="O4" type="open_collector"/>
+        <pin num="14" name="O3" type="open_collector"/>
+        <pin num="15" name="O2" type="open_collector"/>
+        <pin num="16" name="O1" type="open_collector"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries>
+    <library logical="Connector">
+      <uri>/Applications/KiCad/KiCad.app/Contents/SharedSupport/symbols//Connector.kicad_sym</uri>
+    </library>
+    <library logical="Device">
+      <uri>/Applications/KiCad/KiCad.app/Contents/SharedSupport/symbols//Device.kicad_sym</uri>
+    </library>
+    <library logical="ESP32">
+      <uri>/Users/dyx/Documents/514/FinalProject/Museum/ESP32.kicad_sym</uri>
+    </library>
+    <library logical="LED">
+      <uri>/Applications/KiCad/KiCad.app/Contents/SharedSupport/symbols//LED.kicad_sym</uri>
+    </library>
+    <library logical="Motor">
+      <uri>/Applications/KiCad/KiCad.app/Contents/SharedSupport/symbols//Motor.kicad_sym</uri>
+    </library>
+    <library logical="Transistor_Array">
+      <uri>/Applications/KiCad/KiCad.app/Contents/SharedSupport/symbols//Transistor_Array.kicad_sym</uri>
+    </library>
+  </libraries>
+  <nets>
+    <net code="1" name="Net-(Button1-S1)" class="Default">
+      <node ref="Button1" pin="" pinfunction="S1" pintype="bidirectional"/>
+      <node ref="U1" pin="7" pinfunction="TX_D6" pintype="bidirectional"/>
+    </net>
+    <net code="2" name="Net-(Button1-S2)" class="Default">
+      <node ref="Button1" pin="" pinfunction="S2" pintype="bidirectional"/>
+      <node ref="D1" pin="2" pinfunction="GND" pintype="power_in"/>
+      <node ref="D2" pin="2" pinfunction="GND" pintype="power_in"/>
+      <node ref="D3" pin="2" pinfunction="GND" pintype="power_in"/>
+      <node ref="D4" pin="2" pinfunction="GND" pintype="power_in"/>
+      <node ref="U1" pin="13" pinfunction="GND" pintype="power_in"/>
+      <node ref="U3" pin="3" pinfunction="GND" pintype="bidirectional"/>
+    </net>
+    <net code="3" name="Net-(D1-DIN)" class="Default">
+      <node ref="D1" pin="4" pinfunction="DIN" pintype="input"/>
+      <node ref="U1" pin="8" pinfunction="RX_D7" pintype="bidirectional"/>
+    </net>
+    <net code="4" name="Net-(D1-VDD)" class="Default">
+      <node ref="D1" pin="3" pinfunction="VDD" pintype="power_in"/>
+      <node ref="D2" pin="3" pinfunction="VDD" pintype="power_in"/>
+      <node ref="D3" pin="3" pinfunction="VDD" pintype="power_in"/>
+      <node ref="D4" pin="3" pinfunction="VDD" pintype="power_in"/>
+      <node ref="U1" pin="12" pinfunction="VCC_3V3" pintype="power_in"/>
+      <node ref="U3" pin="4" pinfunction="VCC" pintype="bidirectional"/>
+    </net>
+    <net code="5" name="Net-(D2-DIN)" class="Default">
+      <node ref="D2" pin="4" pinfunction="DIN" pintype="input"/>
+      <node ref="U1" pin="9" pinfunction="D8" pintype="bidirectional"/>
+    </net>
+    <net code="6" name="Net-(D3-DIN)" class="Default">
+      <node ref="D3" pin="4" pinfunction="DIN" pintype="input"/>
+      <node ref="U1" pin="10" pinfunction="D9" pintype="bidirectional"/>
+    </net>
+    <net code="7" name="Net-(D4-DIN)" class="Default">
+      <node ref="D4" pin="4" pinfunction="DIN" pintype="input"/>
+      <node ref="U1" pin="11" pinfunction="D10" pintype="bidirectional"/>
+    </net>
+    <net code="8" name="Net-(J1-Pin_1)" class="Default">
+      <node ref="J1" pin="1" pinfunction="Pin_1" pintype="passive"/>
+      <node ref="U1" pin="" pinfunction="-" pintype="bidirectional"/>
+    </net>
+    <net code="9" name="Net-(J1-Pin_2)" class="Default">
+      <node ref="J1" pin="2" pinfunction="Pin_2" pintype="passive"/>
+      <node ref="U1" pin="" pinfunction="+" pintype="bidirectional"/>
+    </net>
+    <net code="10" name="Net-(M1--)" class="Default">
+      <node ref="M1" pin="2" pinfunction="-" pintype="passive"/>
+      <node ref="U2" pin="16" pinfunction="O1" pintype="open_collector"/>
+    </net>
+    <net code="11" name="Net-(U1-D0)" class="Default">
+      <node ref="U1" pin="1" pinfunction="D0" pintype="bidirectional"/>
+      <node ref="U2" pin="1" pinfunction="I1" pintype="input"/>
+    </net>
+    <net code="12" name="Net-(U1-D1)" class="Default">
+      <node ref="U1" pin="2" pinfunction="D1" pintype="bidirectional"/>
+      <node ref="U2" pin="2" pinfunction="I2" pintype="input"/>
+    </net>
+    <net code="13" name="Net-(U1-D2)" class="Default">
+      <node ref="U1" pin="3" pinfunction="D2" pintype="bidirectional"/>
+      <node ref="U2" pin="3" pinfunction="I3" pintype="input"/>
+    </net>
+    <net code="14" name="Net-(U1-D3)" class="Default">
+      <node ref="U1" pin="4" pinfunction="D3" pintype="bidirectional"/>
+      <node ref="U2" pin="4" pinfunction="I4" pintype="input"/>
+    </net>
+    <net code="15" name="Net-(U1-D4)" class="Default">
+      <node ref="U1" pin="5" pinfunction="D4" pintype="bidirectional"/>
+      <node ref="U3" pin="2" pinfunction="SCL" pintype="bidirectional"/>
+    </net>
+    <net code="16" name="Net-(U1-D5)" class="Default">
+      <node ref="U1" pin="6" pinfunction="D5" pintype="bidirectional"/>
+      <node ref="U3" pin="1" pinfunction="SDA" pintype="bidirectional"/>
+    </net>
+    <net code="17" name="Net-(U2-O2)" class="Default">
+      <node ref="M1" pin="1" pintype="passive"/>
+      <node ref="U2" pin="15" pinfunction="O2" pintype="open_collector"/>
+    </net>
+    <net code="18" name="Net-(U2-O3)" class="Default">
+      <node ref="M1" pin="3" pintype="passive"/>
+      <node ref="U2" pin="14" pinfunction="O3" pintype="open_collector"/>
+    </net>
+    <net code="19" name="Net-(U2-O4)" class="Default">
+      <node ref="M1" pin="4" pintype="passive"/>
+      <node ref="U2" pin="13" pinfunction="O4" pintype="open_collector"/>
+    </net>
+    <net code="20" name="unconnected-(D1-DOUT-Pad1)" class="Default">
+      <node ref="D1" pin="1" pinfunction="DOUT" pintype="output"/>
+    </net>
+    <net code="21" name="unconnected-(D2-DOUT-Pad1)" class="Default">
+      <node ref="D2" pin="1" pinfunction="DOUT" pintype="output"/>
+    </net>
+    <net code="22" name="unconnected-(D3-DOUT-Pad1)" class="Default">
+      <node ref="D3" pin="1" pinfunction="DOUT" pintype="output"/>
+    </net>
+    <net code="23" name="unconnected-(D4-DOUT-Pad1)" class="Default">
+      <node ref="D4" pin="1" pinfunction="DOUT" pintype="output"/>
+    </net>
+    <net code="24" name="unconnected-(U1-VUSB-Pad14)" class="Default">
+      <node ref="U1" pin="14" pinfunction="VUSB" pintype="power_in"/>
+    </net>
+    <net code="25" name="unconnected-(U2-COM-Pad9)" class="Default">
+      <node ref="U2" pin="9" pinfunction="COM" pintype="passive"/>
+    </net>
+    <net code="26" name="unconnected-(U2-GND-Pad8)" class="Default">
+      <node ref="U2" pin="8" pinfunction="GND" pintype="power_in"/>
+    </net>
+    <net code="27" name="unconnected-(U2-I5-Pad5)" class="Default">
+      <node ref="U2" pin="5" pinfunction="I5" pintype="input"/>
+    </net>
+    <net code="28" name="unconnected-(U2-I6-Pad6)" class="Default">
+      <node ref="U2" pin="6" pinfunction="I6" pintype="input"/>
+    </net>
+    <net code="29" name="unconnected-(U2-I7-Pad7)" class="Default">
+      <node ref="U2" pin="7" pinfunction="I7" pintype="input"/>
+    </net>
+    <net code="30" name="unconnected-(U2-O5-Pad12)" class="Default">
+      <node ref="U2" pin="12" pinfunction="O5" pintype="open_collector"/>
+    </net>
+    <net code="31" name="unconnected-(U2-O6-Pad11)" class="Default">
+      <node ref="U2" pin="11" pinfunction="O6" pintype="open_collector"/>
+    </net>
+    <net code="32" name="unconnected-(U2-O7-Pad10)" class="Default">
+      <node ref="U2" pin="10" pinfunction="O7" pintype="open_collector"/>
+    </net>
+  </nets>
+</export>
