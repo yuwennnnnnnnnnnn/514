@@ -1,3 +1,4 @@
+#include <Arduino.h>
 #include <BLEDevice.h>
 #include <BLEServer.h>
 #include <BLEUtils.h>
@@ -14,20 +15,18 @@ bool deviceConnected = false;
 bool oldDeviceConnected = false;
 
 /* ========= IR Sensor Pins ========= */
-const int irPin1 = 2;   // Sensor A
-const int irPin2 = 3;   // Sensor B
+const int irPin1 = D1;
+const int irPin2 = D2;
 
 int in_count = 0;
 int out_count = 0;
 int current_count = 0;
 
-const unsigned long timeout = 300;       // detection window (ms)
-const unsigned long debounceDelay = 200;  // debounce after detection (ms)
-const unsigned long releaseTimeout = 2000; // max wait for sensor release (ms)
+const unsigned long timeout = 1000;
+const unsigned long debounceDelay = 500;
 
 void updateCount();
 void sendData();
-void waitForRelease();
 
 /* ========= BLE Callbacks ========= */
 class MyServerCallbacks : public BLEServerCallbacks {
@@ -42,13 +41,13 @@ class MyServerCallbacks : public BLEServerCallbacks {
 };
 
 void setup() {
-
   Serial.begin(115200);
+  delay(1000);
+  Serial.println("Museum Visitor Counter");
 
   pinMode(irPin1, INPUT_PULLUP);
   pinMode(irPin2, INPUT_PULLUP);
 
-  /* ========= Initialize BLE ========= */
   BLEDevice::init(DEVICE_NAME);
   pServer = BLEDevice::createServer();
   pServer->setCallbacks(new MyServerCallbacks());
@@ -64,7 +63,6 @@ void setup() {
 
   pService->start();
 
-  /* Start advertising */
   BLEAdvertising* pAdvertising = BLEDevice::getAdvertising();
   pAdvertising->addServiceUUID(SERVICE_UUID);
   pAdvertising->setScanResponse(true);
@@ -75,73 +73,6 @@ void setup() {
 }
 
 void loop() {
-
-  // ===== Detect Entry (Sensor A triggers first, then B) =====
-  if (digitalRead(irPin1) == LOW) {
-
-    unsigned long startTime = millis();
-
-    while ((millis() - startTime) < timeout) {
-      if (digitalRead(irPin2) == LOW) {
-        Serial.println(">> Entry Detected");
-        in_count++;
-        updateCount();
-        sendData();
-        break;
-      }
-    }
-
-    waitForRelease();
-    delay(debounceDelay);
-  }
-
-  // ===== Detect Exit (Sensor B triggers first, then A) =====
-  else if (digitalRead(irPin2) == LOW) {
-
-    unsigned long startTime = millis();
-
-    while ((millis() - startTime) < timeout) {
-      if (digitalRead(irPin1) == LOW) {
-        if (out_count < in_count) {
-          Serial.println("<< Exit Detected");
-          out_count++;
-          updateCount();
-          sendData();
-          break;
-        }
-      }
-    }
-
-    waitForRelease();
-    delay(debounceDelay);
-  }
-}
-
-/* ========= Update Current Count ========= */
-void updateCount() {
-  current_count = in_count - out_count;
-
-  Serial.print("IN: ");
-  Serial.print(in_count);
-  Serial.print(" OUT: ");
-  Serial.print(out_count);
-  Serial.print(" CURRENT: ");
-  Serial.println(current_count);
-}
-
-/* ========= Send Data via BLE Notify ========= */
-void sendData() {
-
-  if (deviceConnected) {
-    String data = String(current_count);
-    pCharacteristic->setValue(data.c_str());
-    pCharacteristic->notify();
-    Serial.println("BLE Data Sent: " + data);
-  } else {
-    Serial.println("No BLE client connected");
-  }
-
-  /* Handle reconnection: restart advertising when client disconnects */
   if (!deviceConnected && oldDeviceConnected) {
     delay(500);
     pServer->startAdvertising();
@@ -151,13 +82,47 @@ void sendData() {
   if (deviceConnected && !oldDeviceConnected) {
     oldDeviceConnected = true;
   }
+
+  if (digitalRead(irPin1) == LOW) {
+    Serial.println(">> Sensor A triggered - ENTRY");
+    in_count++;
+    updateCount();
+    sendData();
+    delay(debounceDelay);
+    while (digitalRead(irPin1) == LOW) delay(10);
+    delay(200);
+  }
+
+  if (digitalRead(irPin2) == LOW) {
+    Serial.println("<< Sensor B triggered - EXIT");
+    if (out_count < in_count) {
+      out_count++;
+      updateCount();
+      sendData();
+    }
+    delay(debounceDelay);
+    while (digitalRead(irPin2) == LOW) delay(10);
+    delay(200);
+  }
 }
 
-/* ========= Wait for Both Sensors to Release (with timeout) ========= */
-void waitForRelease() {
-  unsigned long start = millis();
-  while ((!digitalRead(irPin1) || !digitalRead(irPin2)) &&
-         (millis() - start) < releaseTimeout) {
-    delay(1);  // yield to prevent WDT reset
+void updateCount() {
+  current_count = in_count - out_count;
+  Serial.print("IN: ");
+  Serial.print(in_count);
+  Serial.print(" OUT: ");
+  Serial.print(out_count);
+  Serial.print(" CURRENT: ");
+  Serial.println(current_count);
+}
+
+void sendData() {
+  if (deviceConnected) {
+    String data = String(current_count);
+    pCharacteristic->setValue(data.c_str());
+    pCharacteristic->notify();
+    Serial.println("BLE Data Sent: " + data);
+  } else {
+    Serial.println("No BLE client connected");
   }
 }

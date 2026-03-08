@@ -490,7 +490,7 @@
       "plot": "gbr/",
       "pos_files": "",
       "specctra_dsn": "",
-      "step": "",
+      "step": "../../../../Museum.stl",
       "svg": "",
       "vrml": ""
     },

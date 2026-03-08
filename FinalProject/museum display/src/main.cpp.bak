@@ -1,0 +1,352 @@
+#include <Arduino.h>
+#include <BLEDevice.h>
+#include <BLEUtils.h>
+#include <BLEClient.h>
+#include <BLERemoteCharacteristic.h>
+#include <BLEScan.h>
+#include <SwitecX25.h>
+#include <Adafruit_NeoPixel.h>
+#include <Wire.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
+
+/* ========= OLED Settings ========= */
+#define SCREEN_WIDTH 128
+#define SCREEN_HEIGHT 64
+#define OLED_RESET    -1
+Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
+
+/* ========= BLE UUID ========= */
+#define SERVICE_UUID        "12345678-1234-1234-1234-123456789abc"
+#define CHARACTERISTIC_UUID "abcd1234-ab12-cd34-ef56-123456789abc"
+
+/* ========= Motor Pins ========= */
+const int motorPin1 = D0;
+const int motorPin2 = D1;
+const int motorPin3 = D2;
+const int motorPin4 = D3;
+
+/* ========= Gauge Settings ========= */
+const int MAX_COUNT = 160;
+const int STEPS_FOR_180 = 540;
+
+/* ========= Gauge Object ========= */
+SwitecX25 gauge(STEPS_FOR_180, motorPin1, motorPin2, motorPin3, motorPin4);
+
+/* ========= NeoPixel ========= */
+#define NUMPIXELS 1
+
+Adafruit_NeoPixel pixel1(NUMPIXELS, D7, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel pixel2(NUMPIXELS, D8, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel pixel3(NUMPIXELS, D9, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel pixel4(NUMPIXELS, D10, NEO_GRB + NEO_KHZ800);
+
+/* ========= BLE State ========= */
+static BLEAddress* pServerAddress = nullptr;
+static BLERemoteCharacteristic* pRemoteCharacteristic = nullptr;
+static bool doConnect = false;
+static bool connected = false;
+static bool doScan = false;
+
+/* ========= Shared Data ========= */
+int receivedCount = 0;
+int targetSteps = STEPS_FOR_180;
+
+/* ========= Button (Master Light Switch) ========= */
+const int buttonPin = D6;
+bool lightsOn = true;
+bool lastButtonState = HIGH;
+unsigned long lastButtonPress = 0;
+const unsigned long buttonDebounce = 300;
+
+/* ========= LED Update Function ========= */
+void updateLEDs(int count) {
+
+  if (!lightsOn) {
+    pixel1.setPixelColor(0, 0);
+    pixel2.setPixelColor(0, 0);
+    pixel3.setPixelColor(0, 0);
+    pixel4.setPixelColor(0, 0);
+  } else {
+    uint32_t white = pixel1.Color(255,255,255);
+
+    pixel1.setPixelColor(0, count >= 30  ? white : 0);
+    pixel2.setPixelColor(0, count >= 60  ? white : 0);
+    pixel3.setPixelColor(0, count >= 100 ? white : 0);
+    pixel4.setPixelColor(0, count >= 130 ? white : 0);
+  }
+
+  pixel1.show();
+  pixel2.show();
+  pixel3.show();
+  pixel4.show();
+}
+
+/* ========= OLED Update Function ========= */
+void updateOLED(int count) {
+  Serial.print("Updating OLED with count: ");
+  Serial.println(count);
+
+  display.clearDisplay();
+
+  display.setTextSize(1);
+  display.setTextColor(SSD1306_WHITE);
+  display.setCursor(10, 0);
+  display.println("Museum Visitors");
+
+  display.drawLine(0, 12, 128, 12, SSD1306_WHITE);
+
+  display.setTextSize(3);
+  display.setCursor(30, 25);
+  display.print(count);
+
+  display.setTextSize(1);
+  display.setCursor(30, 55);
+  display.print("/ ");
+  display.print(MAX_COUNT);
+
+  display.display();
+}
+
+/* ========= OLED Show Message ========= */
+void showOLEDMessage(const char* msg) {
+  display.clearDisplay();
+  display.setTextSize(1);
+  display.setTextColor(SSD1306_WHITE);
+  display.setCursor(10, 25);
+  display.println(msg);
+  display.display();
+}
+
+/* ========= BLE Client Callback ========= */
+class MyClientCallback : public BLEClientCallbacks {
+  void onConnect(BLEClient* pclient) {
+    Serial.println("Connected to sensor device");
+  }
+
+  void onDisconnect(BLEClient* pclient) {
+    connected = false;
+    Serial.println("Disconnected from sensor device");
+    doScan = true;
+  }
+};
+
+/* ========= Notify Callback ========= */
+static void notifyCallback(
+  BLERemoteCharacteristic* pBLERemoteCharacteristic,
+  uint8_t* pData,
+  size_t length,
+  bool isNotify
+) {
+
+  String value = "";
+  for (size_t i = 0; i < length; i++) {
+    value += (char)pData[i];
+  }
+
+  receivedCount = value.toInt();
+
+  if (receivedCount < 0) receivedCount = 0;
+  if (receivedCount > MAX_COUNT) receivedCount = MAX_COUNT;
+
+  int mappedSteps = map(receivedCount, 0, MAX_COUNT, 0, STEPS_FOR_180);
+
+  targetSteps = STEPS_FOR_180 - mappedSteps;
+
+  gauge.setPosition(targetSteps);
+
+  updateLEDs(receivedCount);
+  updateOLED(receivedCount);
+
+  Serial.print("Received count: ");
+  Serial.print(receivedCount);
+  Serial.print(" -> Target steps: ");
+  Serial.println(targetSteps);
+}
+
+/* ========= Scan Callback ========= */
+class MyAdvertisedDeviceCallbacks : public BLEAdvertisedDeviceCallbacks {
+  void onResult(BLEAdvertisedDevice advertisedDevice) {
+
+    if (advertisedDevice.haveServiceUUID() &&
+        advertisedDevice.isAdvertisingService(BLEUUID(SERVICE_UUID))) {
+
+      Serial.println("Found sensor device");
+
+      pServerAddress = new BLEAddress(advertisedDevice.getAddress());
+
+      advertisedDevice.getScan()->stop();
+
+      doConnect = true;
+      doScan = false;
+    }
+  }
+};
+
+/* ========= Connect ========= */
+const int MAX_RETRIES = 3;
+
+bool connectToServer() {
+
+  // Stop scanning before connecting — required on ESP32-C3
+  BLEDevice::getScan()->stop();
+  delay(200);
+
+  for (int attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+
+    Serial.print("Connection attempt ");
+    Serial.print(attempt);
+    Serial.print("/");
+    Serial.println(MAX_RETRIES);
+
+    BLEClient* pClient = BLEDevice::createClient();
+    pClient->setClientCallbacks(new MyClientCallback());
+
+    // Use BLE_ADDR_TYPE_PUBLIC; if server uses random, try BLE_ADDR_TYPE_RANDOM
+    if (!pClient->connect(*pServerAddress, BLE_ADDR_TYPE_PUBLIC)) {
+      Serial.println("Failed to connect, retrying...");
+      delete pClient;
+      delay(500);
+      continue;
+    }
+
+    Serial.println("Connected! Looking for service...");
+
+    BLERemoteService* pRemoteService =
+        pClient->getService(BLEUUID(SERVICE_UUID));
+
+    if (pRemoteService == nullptr) {
+      Serial.println("Failed to find service");
+      pClient->disconnect();
+      delete pClient;
+      delay(500);
+      continue;
+    }
+
+    pRemoteCharacteristic =
+        pRemoteService->getCharacteristic(BLEUUID(CHARACTERISTIC_UUID));
+
+    if (pRemoteCharacteristic == nullptr) {
+      Serial.println("Failed to find characteristic");
+      pClient->disconnect();
+      delete pClient;
+      delay(500);
+      continue;
+    }
+
+    if (pRemoteCharacteristic->canNotify()) {
+      pRemoteCharacteristic->registerForNotify(notifyCallback);
+    }
+
+    connected = true;
+    Serial.println("BLE ready, waiting for count...");
+    return true;
+  }
+
+  Serial.println("All connection attempts failed");
+  return false;
+}
+
+/* ========= Setup ========= */
+void setup() {
+
+  Serial.begin(115200);
+  Serial.println("=== DISPLAY GAUGE BLE START ===");
+
+  Serial.println("Zeroing gauge...");
+  gauge.zero();
+
+  gauge.setPosition(STEPS_FOR_180);
+
+  /* OLED setup (I2C: D4=SDA, D5=SCL) */
+  Wire.begin(D4, D5);
+  // Try address 0x3C first, then 0x3D
+  if (!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {
+    Serial.println("OLED 0x3C failed, trying 0x3D...");
+    if (!display.begin(SSD1306_SWITCHCAPVCC, 0x3D)) {
+      Serial.println("OLED init failed on both addresses!");
+    } else {
+      Serial.println("OLED ready at 0x3D");
+    }
+  } else {
+    Serial.println("OLED ready at 0x3C");
+  }
+  display.setRotation(2);  // Flip 180 degrees
+  display.clearDisplay();
+  display.setTextSize(1);
+  display.setTextColor(SSD1306_WHITE);
+  display.setCursor(10, 25);
+  display.println("Waiting for BLE...");
+  display.display();
+
+  /* Button setup */
+  pinMode(buttonPin, INPUT_PULLUP);
+
+  /* NeoPixel setup */
+  pixel1.begin();
+  pixel2.begin();
+  pixel3.begin();
+  pixel4.begin();
+
+  pixel1.setBrightness(40);
+  pixel2.setBrightness(40);
+  pixel3.setBrightness(40);
+  pixel4.setBrightness(40);
+
+  pixel1.show();
+  pixel2.show();
+  pixel3.show();
+  pixel4.show();
+
+  BLEDevice::init("");
+
+  BLEScan* pBLEScan = BLEDevice::getScan();
+
+  pBLEScan->setAdvertisedDeviceCallbacks(
+      new MyAdvertisedDeviceCallbacks());
+
+  pBLEScan->setInterval(1349);
+  pBLEScan->setWindow(449);
+  pBLEScan->setActiveScan(true);
+
+  doScan = true;
+}
+
+/* ========= Loop ========= */
+void loop() {
+
+  // ===== Check button (toggle lights on/off) =====
+  bool buttonState = digitalRead(buttonPin);
+  if (buttonState == LOW && lastButtonState == HIGH &&
+      (millis() - lastButtonPress) > buttonDebounce) {
+    lightsOn = !lightsOn;
+    lastButtonPress = millis();
+    Serial.print("Lights: ");
+    Serial.println(lightsOn ? "ON" : "OFF");
+    // Immediately update LEDs
+    updateLEDs(receivedCount);
+  }
+  lastButtonState = buttonState;
+
+  if (doConnect) {
+
+    if (connectToServer()) {
+      Serial.println("Connected successfully");
+    } else {
+      Serial.println("Connect failed, will rescan...");
+      doScan = true;
+    }
+
+    doConnect = false;
+  }
+
+  if (doScan && !connected) {
+    Serial.println("Scanning for sensor device...");
+    showOLEDMessage("Waiting for\nsensor device...");
+    BLEDevice::getScan()->start(5, false);
+  }
+
+  gauge.update();
+
+  delay(1);
+}
