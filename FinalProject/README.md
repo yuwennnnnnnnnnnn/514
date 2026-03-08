@@ -25,3 +25,7 @@ Display device: physically displays the current visitor count or occupancy level
 | Display Device | LEDs ×4      | Kingbright WP7113      | Occupancy indicators      |
 | Display Device | Button       | APEM 9008T10           | User control light        |
 | Display Device | Battery      | Adafruit LiPo 1200 mAh | Power source              |
+
+
+### Functional video link: https://drive.google.com/file/d/1od8rS6hWe6a75a3NW0yvldowDUYzMvKP/view?usp=drive_link
+
